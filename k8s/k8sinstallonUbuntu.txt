@@ -77,7 +77,7 @@ step8 (Fire on all nodes)
 =======
 step9 : only on master node
 
-kubeadm config images pull --cri-socket /run/containerd/containerd.sock --kubernetes-version v1.29.0
+kubeadm config images pull --cri-socket /run/containerd/containerd.sock --kubernetes-version v1.30.0
 kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs --kubernetes-version=v1.30.0 --control-plane-endpoint=privateIPofMasternode --ignore-preflight-errors=Mem --cri-socket /run/containerd/containerd.sock
 
 
