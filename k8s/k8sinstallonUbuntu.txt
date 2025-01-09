@@ -60,8 +60,8 @@ step8 (Fire on all nodes)
 
  23  sudo apt-get update
    24  sudo apt-get install -y apt-transport-https ca-certificates curl gpg
-   25  curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-   26  echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   25  curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+   26  echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
    27  sudo apt-get update
    28  sudo apt-get install -y kubelet kubeadm kubectl
    29  sudo apt-mark hold kubelet kubeadm kubectl
@@ -78,7 +78,7 @@ step8 (Fire on all nodes)
 step9 : only on master node
 
 kubeadm config images pull --cri-socket /run/containerd/containerd.sock --kubernetes-version v1.29.0
-kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs --kubernetes-version=v1.29.0 --control-plane-endpoint=privateIPofMasternode --ignore-preflight-errors=Mem --cri-socket /run/containerd/containerd.sock
+kubeadm init --pod-network-cidr=10.244.0.0/16 --upload-certs --kubernetes-version=v1.30.0 --control-plane-endpoint=privateIPofMasternode --ignore-preflight-errors=Mem --cri-socket /run/containerd/containerd.sock
 
 
 ###Copy join(second) command from the output of above command and paste in notpad .
