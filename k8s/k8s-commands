@@ -33,7 +33,25 @@ Check the logs
 Login inside pod
 30  kubectl  exec -it p1 bash -n google
    31  history
-
+=======================================
+ 8  kubectl create deployment app1 --image=httpd -n google
+    9  kubectl delete pod app1-5b79b9fd68-dnldp -n google
+   10  kubectl delete pod app1-5b79b9fd68-fs9lt -n google
+   11  kubectl create deployment vadapav --image=httpd -n google
+   12  kubectl delete pod vadapav-7d54d9c54c-465dt -n google
+   13  kubectl delete pod vadapav-7d54d9c54c-bv6pq -n google
+   14  clear
+   15  kubectl scale deployment app1 --replicas=3 -n google
+   16  kubectl delete deployment vadapav -n google
+   17  kubectl scale deployment app1 --replicas=10 -n google
+   18  kubectl scale deployment app1 --replicas=30 -n google
+   19  kubectl scale deployment app1 --replicas=1 -n google
+   20  kubectl scale deployment app1 --replicas=15 -n google
+   21  kubectl scale deployment app1 --replicas= -n google
+   22  kubectl scale deployment app1 --replicas=1 -n google
+   23  kubectl scale deployment app1 --replicas=0 -n google
+   24  kubectl scale deployment app1 --replicas=3 -n google
+==================================================
 
 159  kubectl create ns google
   160  kubectl create deployment app1 --image=httpd -n google
