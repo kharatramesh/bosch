@@ -113,3 +113,28 @@ spec:
       containers:
       - name: c1
         image: nginx
+====================================
+ 60  # Create yaml file using dry-run
+   61  cat p1.yaml
+   62  cat app1.yaml
+   63  clear
+   64  kubectl create deployment app2 --image=nginx -n ibm --dry-run=client -o yaml
+   65  kubectl create deployment app2 --image=nginx -n ibm --dry-run=server -o yaml
+   66  clear
+   67  kubectl create deployment app2 --image=nginx -n ibm --dry-run=client -o yaml > app1.yaml
+   68  cat app1.yaml
+   69  kubectl apply -f app1.yaml
+   70  kubectl get deploy -n ibm
+   71  kubectl delete -f app1.yaml
+   72  clear
+   73  kubectl create deployment app11 --image=httpd -n ibm --dry-run=client -o yaml
+   74  kubectl create deployment app11 --image=httpd -n ibm --dry-run=client -o yaml > app11.yaml
+   75  kubectl run p1 --image=httpd --dry-run=client -o yaml
+   76  kubectl run p1 --image=httpd --dry-run=server -o yaml
+   77  history
+   78  kubectl run p1 --image=httpd --dry-run=server -o json
+   79  kubectl run p11 --image=httpd --dry-run=client -o json
+   80  kubectl run p11 --image=httpd --dry-run=client -o json >> p11.json
+   81  kubectl apply -f p11.json
+   82  kubectl get pods
+   83  kubectl delete  -f p11.json
