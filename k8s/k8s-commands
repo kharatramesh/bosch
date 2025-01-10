@@ -1,3 +1,4 @@
+
 How to create namespace
 kubectl create namespace google
     8  kubectl create namespace ibm
@@ -68,3 +69,26 @@ Login inside pod
   171  kubectl get pods -n google
   172  kubectl expose deployment/app2 --name=app1lb2 --type=LoadBalancer --port=80 --target-port=80 -n google --dry-run=client -o yaml
   173  kubectl describe service app1lb2 -n google
+========================
+root@master:/yamls# cat p1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-switch
+  namespace: ibm
+  labels:
+    env: production
+    customer: ibm
+    region: useeast1
+  annotations:
+    datacenter: useeast1
+    imageversion: dev1
+spec:
+  containers:
+  - name: c1
+    image: nginx
+    ports:
+    - containerPort: 80
+      name: webport
+      protocol: "TCP"
+===================================
