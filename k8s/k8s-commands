@@ -54,11 +54,14 @@ Login inside pod
    24  kubectl scale deployment app1 --replicas=3 -n google
 ==================================================
 
-159  kubectl create ns google
-  160  kubectl create deployment app1 --image=httpd -n google
-  161  kubectl get pods -n google
-  162  kubectl expose deployment/app1 --name=app1lb1 --type=LoadBalancer --port=80 --target-port=80 -n google
-  163  kubectl get svc -n google
+Service
+  kubectl create ns google
+  kubectl create deployment app1 --image=httpd -n google
+  kubectl get pods -n google
+  kubectl expose deployment/app1 --name=app1lb1 --type=NodePort --port=80 --target-port=80 -n google
+  kubectl get svc -n google
+  kubectl expose deployment/app1 --name=app1lb1 --type=LoadBalancer --port=80 --target-port=80 -n google
+  kubectl get svc -n google
   164  clear
   165  kubectl create deployment app2 --image=kharatramesh/vadapavimages:vadapav -n google
   166  kubectl expose deployment/app2 --name=app1lb2 --type=LoadBalancer --port=80 --target-port=80 -n google
