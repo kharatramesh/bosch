@@ -92,3 +92,24 @@ spec:
       name: webport
       protocol: "TCP"
 ===================================
+root@master:/yamls# cat app1.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vadapav
+  namespace: ibm
+  labels:
+    dev: ibm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      dish: vadapav
+  template:
+    metadata:
+      labels:
+        dish: vadapav
+    spec:
+      containers:
+      - name: c1
+        image: nginx
