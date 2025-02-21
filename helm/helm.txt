@@ -65,3 +65,54 @@ spec:
       containers:
       - image: {{ .Values.image.repository }}
         name: httpd
+========================================================
+Hexa files ....
+
+root@master:~/hexa/templates# cat service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app1
+  name: {{ .Values.servicename }}
+spec:
+  ports:
+  - port: {{ .Values.serviceport }}
+    protocol: TCP
+    targetPort:  {{ .Values.targetport  }}
+  selector:
+    app: app1
+  type: {{ .Values.servicetype }}
+root@master:~/hexa/templates# cat app1.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app1
+  name: {{ .Values.appname }}
+
+spec:
+  replicas: {{ .Values.replicacount }}
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+      - image: {{ .Values.imagename }}
+        name: {{ .Values.cname }}
+root@master:~/hexa/templates# cd ..
+root@master:~/hexa# vi values.yaml
+root@master:~/hexa# cat values.yaml
+replicacount: 3
+imagename: httpd
+servicename: smaosas1
+cname: c1
+appname: apphexa
+serviceport: 80
+targetport: 80
+servicetype: NodePort
+
