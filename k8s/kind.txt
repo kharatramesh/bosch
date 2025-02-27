@@ -1,0 +1,16 @@
+Step 1: Install container Engine
+
+Step2:
+
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-amd64
+
+Step3:
+
+chmod a+x kind
+
+step4:
+
+cp kind /usr/bin
+
+step5:
+kind create cluster --name cluster1
