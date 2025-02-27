@@ -14,3 +14,11 @@ cp kind /usr/bin
 
 step5:
 kind create cluster --name cluster1
+
+Step6: install kubectl on ubuntu
+
+ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod a+x kubectl
+cp kubectl /usr/bin
+
+kubectl get nodes
