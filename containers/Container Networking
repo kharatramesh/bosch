@@ -1,0 +1,3 @@
+IPVLAN
+
+docker network create --driver ipvlan --subnet=172.16.0.0/24 --gateway=172.16.0.1 -o ipvlan_mode=l2 -o parent=eth0 ipvlannet1
