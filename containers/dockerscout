@@ -1,0 +1,28 @@
+To install the latest version of the plugin, run the following commands:
+
+curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+sh install-scout.sh
+
+wget https://github.com/docker/scout-cli/releases/download/v1.16.1/docker-scout_1.16.1_linux_arm64.tar.gz
+
+mkdir -p $HOME/.docker/scout
+
+Extract the archive and move the docker-scout binary to the $HOME/.docker/scout directory.
+
+Make the binary executable: chmod +x $HOME/.docker/scout/docker-scout.
+
+Add the scout subdirectory to your .docker/config.json as a plugin directory:
+
+
+{
+  "cliPluginsExtraDirs": [
+    "/home/USER/.docker/scout"
+  ]
+}
+
+-----------------
+docker run -it \
+  -e DOCKER_SCOUT_HUB_USER=<your Docker Hub user name> \
+  -e DOCKER_SCOUT_HUB_PASSWORD=<your Docker Hub PAT>  \
+  docker/scout-cli <command>
+
