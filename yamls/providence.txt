@@ -20,6 +20,48 @@
  2119  kubectl taint node worker1  dish-
  2120  kubectl taint node worker1 dish=samosa:NoExecute
  2121  kubectl describe node worker1 | grep -i taint
+
+====================
+
+root@master:/trainer# cat ingressrules.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: trainer-app1
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: vadapav.trainer.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: vadapav
+            port:
+              number: 80
+  - host: pavbhaji.trainer.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: pavbhaji
+            port:
+              number: 80
+  - host: biryani.trainer.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: biryani
+            port:
+              number: 80
+
  2122  kubectl delete deployment app1 -n trainer
  2123  cat bosch/yamls/tt-pod1.yaml
  2124  vi app1.yaml
