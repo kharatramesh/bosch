@@ -68,3 +68,41 @@ spec:
  2125  kubectl apply -f app1.yaml -n trainer
  2126  vi app1.yaml
  2127  kubectl apply -f app1.yaml -n trainer
+=======================
+
+root@master:/trainer# cat p2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dosa1
+  namespace: trainer
+  labels:
+    app: uat
+    customer: providence
+  annotations:
+    region: east-asia
+    version: fresh-samosa
+spec:
+  containers:
+  - name: c1
+    image: docker.io/httpd
+    volumeMounts:
+    - name: v1
+      mountPath: /logs
+    - name: v2
+      mountPath: /monitoring
+    - name: v3
+      mountPath: /errors
+  volumes:
+  - name: v1
+    persistentVolumeClaim:
+      claimName: pvc1
+  - name: v2
+    hostPath:
+      path: /dosa
+      type: DirectoryOrCreate
+  - name: v3
+    emptyDir:
+      medium: ""
+      sizeLimit: 100Mi
+
