@@ -1,0 +1,28 @@
+2100  kubectl describe node worker1 | grep -i taint
+ 2101  kubectl taint node worker1 node.kubernetes.io/unschedulable-
+ 2102  kubectl describe node worker1 | grep -i taint
+ 2103  kubectl taint node worker1 node.kubernetes.io/unschedulable-
+ 2104  kubectl describe node worker1 | grep -i taint
+ 2105  kubectl taint node worker1 node.kubernetes.io/unschedulable-
+ 2106  kubectl describe node worker1 | grep -i taint
+ 2107  kubectl describe node worker2 | grep -i taint
+ 2108  kubectl describe node worker3 | grep -i taint
+ 2109  kubectl describe node worker1 | grep -i taint
+ 2110  kubectl taint node worker1 node.kubernetes.io/unschedulable-
+ 2111  kubectl describe node worker1 | grep -i taint
+ 2112  kubectl edit node worker1
+ 2113  kubectl describe node worker1 | grep -i taint
+ 2114  clear
+ 2115  kubectl create deployment app2 --image=httpd --replicas=5 -n trainer
+ 2116  kubectl taint node worker1 dish=samosa:NoSchedule
+ 2117  kubectl describe node worker1 | grep -i taint
+ 2118  kubectl scale deployment app2 --replicas=7 -n trainer
+ 2119  kubectl taint node worker1  dish-
+ 2120  kubectl taint node worker1 dish=samosa:NoExecute
+ 2121  kubectl describe node worker1 | grep -i taint
+ 2122  kubectl delete deployment app1 -n trainer
+ 2123  cat bosch/yamls/tt-pod1.yaml
+ 2124  vi app1.yaml
+ 2125  kubectl apply -f app1.yaml -n trainer
+ 2126  vi app1.yaml
+ 2127  kubectl apply -f app1.yaml -n trainer
