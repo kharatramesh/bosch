@@ -1,0 +1,41 @@
+mkdir /trainer
+cd /trainer
+kubectl create namespace trainer
+kubectl create deployment vadapav --image=kharatramesh/vadapavimages:vadapav -n trainer --dry-run=client -o yaml > vadapav.yaml
+kubectl create deployment pavbhaji--image=kharatramesh/vadapavimages:pavbhaji -n trainer --dry-run=client -o yaml > pavbhaji.yaml
+kubectl create deployment grafana --image=grafana/grafana -n trainer --dry-run=client -o yaml > grafana.yaml
+
+
+# please open each file and enter nodeSelector
+root@master:/trainer# cat pavbhaji.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pavbhaji
+  name: pavbhaji
+  namespace: trainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pavbhaji
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pavbhaji
+    spec:
+      containers:
+      - image: kharatramesh/vadapavimages:pavbhaji
+        name: vadapavimages
+      nodeSelector:
+        "kubernetes.io/os": linux
+
+
+  
+kubectl expose deployment/vadapav --name=vadapav --type=ClusterIP --port=80 --target-port=80 -n trainer
+kubectl expose deployment/pavbhaji --name=pavbhaji --type=ClusterIP --port=80 --target-port=80 -n trainer
+kubectl expose deployment/grafana --name=grafana --type=ClusterIP --port=3000 --target-port=3000 -n trainer
