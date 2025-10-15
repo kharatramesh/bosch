@@ -39,3 +39,47 @@ spec:
 kubectl expose deployment/vadapav --name=vadapav --type=ClusterIP --port=80 --target-port=80 -n trainer
 kubectl expose deployment/pavbhaji --name=pavbhaji --type=ClusterIP --port=80 --target-port=80 -n trainer
 kubectl expose deployment/grafana --name=grafana --type=ClusterIP --port=3000 --target-port=3000 -n trainer
+
+
+
+======
+root@master:/trainer# cat ingressrules.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: trainer-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.vadapav.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: vadapav
+            port:
+              number: 80
+  - host: www.pavbhaji.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: pavbhaji
+            port:
+              number: 80
+  - host: www.idli.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 3000
+==============
+kubectl apply -f ingressrules.yaml -n trainer
