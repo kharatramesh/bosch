@@ -54,5 +54,8 @@ spec:
 kubectl get scaledobject -n trainer
 kubectl get hpa -n trainer
 kubectl get pods -n trainer
-
+============================
+To increase cpu load , login to one of the pod and run below command
+kubectl exec -it podname -n trainer -- bash
+dd if=/dev/zero of=/dev/null
 
