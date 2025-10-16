@@ -1,20 +1,58 @@
-az aks update --resource-group myResourceGroup --name myAKSCluster --enable-keda
-kubectl get pods -n kube-system 
+helm repo add kedacore https://kedacore.github.io/charts  
+helm repo update
+helm install keda kedacore/keda --namespace keda --create-namespace
+kubectl get pods -n keda
+-------------------------------------
+examples:
 
+root@master:/trainer# cat keda-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kedad1
+  name: kedad1
+  namespace: trainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kedad1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kedad1
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          limits:
+            cpu: 40m
+            memory: 40M
+          requests:
+            cpu: 20m
+            memory: 20M
+-------------------------------------
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: keda-demo-scaledobject
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: kedad1
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  triggers:
+    - type: cpu
+      metricType: Utilization
+      metadata:
+        value: "50"
+===================================================
+kubectl get scaledobject -n trainer
+kubectl get hpa -n trainer
+kubectl get pods -n trainer
 
-git clone https://github.com/karthikeyanVK/mongo-keda-scaler.git
-kubectl apply -f deployment/
-kubectl apply -f keda/mongo-hpa.yaml
-
-To scale up we have to insert some values to Mongo database. To do this we can use the helper app:
-
-kubectl exec $(kubectl get pods | grep "server" | cut -f 1 -d " ") -- keda-talk mongo insert
-
-kubectl get pods
-
-kubectl exec $(kubectl get pods | grep "server" | cut -f 1 -d " ") -- keda-talk mongo delete
-
-to debug :
-
-kubectl logs -n keda -l app=keda-operator
 
