@@ -1,0 +1,26 @@
+root@master:/trainer# cat ds1.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: d1
+  name: d1
+  namespace: trainer
+spec:
+  selector:
+    matchLabels:
+      app: d1
+  template:
+    metadata:
+      labels:
+        app: d1
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      tolerations:
+        # Mark the pod as a critical add-on for rescheduling.
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
