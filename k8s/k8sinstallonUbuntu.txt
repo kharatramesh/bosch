@@ -97,3 +97,7 @@ Step10 (Only fire on master nodes)
 kubectl create -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/canal.yaml -O
 kubectl apply -f canal.yaml
+====================
+to join worker nodes
+kubeadm join 172.31.45.52:6443 --token iulf0y.96g0y18qnhda8hsl \
+        --discovery-token-ca-cert-hash sha256:6b821426d7953d2838ec6ce2072307629bfbc5e0ae7b3a6d812546e5810f2a6e
