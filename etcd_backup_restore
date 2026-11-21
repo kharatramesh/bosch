@@ -1,3 +1,20 @@
+------------------------------------NewerVersion---------------------
+
+Download : wget https://github.com/etcd-io/etcd/releases/download/v3.7.4/etcd-v3.7.4-linux-amd64.tar.gz
+
+Backup----
+--------------------
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
+  snapshot save snapshot1.db
+
+Restore ---
+----------------
+etcdutl --data-dir /var/lib/etcd snapshot restore snapshot1.db
+
+
+
+-----------------------------------------------OLder Version--------------------------------
 wget https://github.com/etcd-io/etcd/releases/download/v3.3.12/etcd-v3.3.12-linux-amd64.tar.gz
 tar xvf etcd-v3.3.12-linux-amd64.tar.gz
 sudo cp etcd-v3.3.12-linux-amd64/etcd* /usr/local/bin
